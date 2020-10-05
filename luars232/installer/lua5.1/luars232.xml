@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jonchki-artifact version="1.0">
+	<info group="com.github.srdgame"
+	      module="luars232"
+	      artifact="lua5.1-luars232"
+	      version="@PROJECT_VERSION@"
+	      vcs-id="@PROJECT_VERSION_VCS@"
+	      extension="tar.xz"
+	      platform="@JONCHKI_PLATFORM@">
+		<license name="MIT"/>
+		<author name="Petr Stetiar" url="https://github.com/srdgame/librs232" />
+		<description>
+			multiplatform library for serial communications over RS-232 (serial port)
+		</description>
+	</info>
+	<dependencies>
+		<build-dependency group="org.lua" module="lua" artifact="lua" version="5.1"/>
+		<dependency group="org.lua" module="lua" artifact="lua"/>
+	</dependencies>
+</jonchki-artifact>
