@@ -1,0 +1,154 @@
+diff -uNr librs232-master/bindings/lua/luars232.c librs232-master_patched/bindings/lua/luars232.c
+--- librs232-master/bindings/lua/luars232.c	2019-11-20 12:18:47.000000000 +0100
++++ librs232-master_patched/bindings/lua/luars232.c	2020-12-08 21:51:32.746847281 +0100
+@@ -65,6 +65,14 @@
+ 	{ "RS232_BAUD_115200", RS232_BAUD_115200 },
+ 	{ "RS232_BAUD_460800", RS232_BAUD_460800 },
+ 	{ "RS232_BAUD_921600", RS232_BAUD_921600 },
++	{ "RS232_BAUD_1000000", RS232_BAUD_1000000 },
++	{ "RS232_BAUD_1152000", RS232_BAUD_1152000 },
++	{ "RS232_BAUD_1500000", RS232_BAUD_1500000 },
++	{ "RS232_BAUD_2000000", RS232_BAUD_2000000 },
++	{ "RS232_BAUD_2500000", RS232_BAUD_2500000 },
++	{ "RS232_BAUD_3000000", RS232_BAUD_3000000 },
++	{ "RS232_BAUD_3500000", RS232_BAUD_3500000 },
++	{ "RS232_BAUD_4000000", RS232_BAUD_4000000 },
+ 	/* databits */
+ 	{ "RS232_DATA_5", RS232_DATA_5 },
+ 	{ "RS232_DATA_6", RS232_DATA_6 },
+diff -uNr librs232-master/include/librs232/rs232.h librs232-master_patched/include/librs232/rs232.h
+--- librs232-master/include/librs232/rs232.h	2019-11-20 12:18:47.000000000 +0100
++++ librs232-master_patched/include/librs232/rs232.h	2020-12-08 21:52:57.573495570 +0100
+@@ -101,6 +101,14 @@
+ 	RS232_BAUD_115200,
+ 	RS232_BAUD_460800,
+ 	RS232_BAUD_921600,
++	RS232_BAUD_1000000,
++	RS232_BAUD_1152000,
++	RS232_BAUD_1500000,
++	RS232_BAUD_2000000,
++	RS232_BAUD_2500000,
++	RS232_BAUD_3000000,
++	RS232_BAUD_3500000,
++	RS232_BAUD_4000000,
+ 	RS232_BAUD_MAX
+ };
+ 
+diff -uNr librs232-master/include/librs232/rs232_windows.h librs232-master_patched/include/librs232/rs232_windows.h
+--- librs232-master/include/librs232/rs232_windows.h	2019-11-20 12:18:47.000000000 +0100
++++ librs232-master_patched/include/librs232/rs232_windows.h	2020-12-08 21:57:40.667952642 +0100
+@@ -61,6 +61,38 @@
+ #define CBR_921600 921600
+ #endif
+ 
++#ifndef CBR_1000000
++#define CBR_1000000 1000000
++#endif
++
++#ifndef CBR_1152000
++#define CBR_1152000 1152000
++#endif
++
++#ifndef CBR_1500000
++#define CBR_1500000 1500000
++#endif
++
++#ifndef CBR_2000000
++#define CBR_2000000 2000000
++#endif
++
++#ifndef CBR_2500000
++#define CBR_2500000 2500000
++#endif
++
++#ifndef CBR_3000000
++#define CBR_3000000 3000000
++#endif
++
++#ifndef CBR_3500000
++#define CBR_3500000 3500000
++#endif
++
++#ifndef CBR_4000000
++#define CBR_4000000 4000000
++#endif
++
+ struct rs232_windows_t {
+ 	HANDLE fd;
+ 	COMMTIMEOUTS old_tm;
+diff -uNr librs232-master/src/rs232_posix.c librs232-master_patched/src/rs232_posix.c
+--- librs232-master/src/rs232_posix.c	2019-11-20 12:18:47.000000000 +0100
++++ librs232-master_patched/src/rs232_posix.c	2020-12-08 21:45:43.872089426 +0100
+@@ -577,6 +577,38 @@
+ 		cfsetispeed(&term, B921600);
+ 		cfsetospeed(&term, B921600);
+ 		break;
++	case RS232_BAUD_1000000:
++		cfsetispeed(&term, B1000000);
++		cfsetospeed(&term, B1000000);
++		break;
++	case RS232_BAUD_1152000:
++		cfsetispeed(&term, B1152000);
++		cfsetospeed(&term, B1152000);
++		break;
++	case RS232_BAUD_1500000:
++		cfsetispeed(&term, B1500000);
++		cfsetospeed(&term, B1500000);
++		break;
++	case RS232_BAUD_2000000:
++		cfsetispeed(&term, B2000000);
++		cfsetospeed(&term, B2000000);
++		break;
++	case RS232_BAUD_2500000:
++		cfsetispeed(&term, B2500000);
++		cfsetospeed(&term, B2500000);
++		break;
++	case RS232_BAUD_3000000:
++		cfsetispeed(&term, B3000000);
++		cfsetospeed(&term, B3000000);
++		break;
++	case RS232_BAUD_3500000:
++		cfsetispeed(&term, B3500000);
++		cfsetospeed(&term, B3500000);
++		break;
++	case RS232_BAUD_4000000:
++		cfsetispeed(&term, B4000000);
++		cfsetospeed(&term, B4000000);
++		break;
+ 	default:
+ 		return RS232_ERR_UNKNOWN;
+ 	}
+diff -uNr librs232-master/src/rs232_windows.c librs232-master_patched/src/rs232_windows.c
+--- librs232-master/src/rs232_windows.c	2019-11-20 12:18:47.000000000 +0100
++++ librs232-master_patched/src/rs232_windows.c	2020-12-08 21:55:55.310752119 +0100
+@@ -937,6 +937,30 @@
+ 	case RS232_BAUD_921600:
+ 		pdcb.BaudRate = CBR_921600;
+ 		break;
++	case RS232_BAUD_1000000:
++		pdcb.BaudRate = CBR_1000000;
++		break;
++	case RS232_BAUD_1152000:
++		pdcb.BaudRate = CBR_1152000;
++		break;
++	case RS232_BAUD_1500000:
++		pdcb.BaudRate = CBR_1500000;
++		break;
++	case RS232_BAUD_2000000:
++		pdcb.BaudRate = CBR_2000000;
++		break;
++	case RS232_BAUD_2500000:
++		pdcb.BaudRate = CBR_2500000;
++		break;
++	case RS232_BAUD_3000000:
++		pdcb.BaudRate = CBR_3000000;
++		break;
++	case RS232_BAUD_3500000:
++		pdcb.BaudRate = CBR_3500000;
++		break;
++	case RS232_BAUD_4000000:
++		pdcb.BaudRate = CBR_4000000;
++		break;
+ 	default:
+ 		return RS232_ERR_UNKNOWN;
+ 	}
