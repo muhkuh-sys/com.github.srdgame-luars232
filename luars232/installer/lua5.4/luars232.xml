@@ -17,4 +17,9 @@
 		<build-dependency group="org.lua" module="lua" artifact="lua" version="5.4"/>
 		<dependency group="org.lua" module="lua" artifact="lua"/>
 	</dependencies>
+	<actions>
+		<action name="pack">
+		  return true
+		</action>
+	</actions>
 </jonchki-artifact>
