@@ -1,6 +1,6 @@
 diff -uNr librs232-master/bindings/lua/luars232.c librs232-master_patched/bindings/lua/luars232.c
---- librs232-master/bindings/lua/luars232.c	2019-11-20 12:18:47.000000000 +0100
-+++ librs232-master_patched/bindings/lua/luars232.c	2020-12-08 21:51:32.746847281 +0100
+--- librs232-master/bindings/lua/luars232.c	2023-10-12 11:17:54.000000000 +0200
++++ librs232-master_patched/bindings/lua/luars232.c	2025-06-25 10:14:02.401631910 +0200
 @@ -65,6 +65,14 @@
  	{ "RS232_BAUD_115200", RS232_BAUD_115200 },
  	{ "RS232_BAUD_460800", RS232_BAUD_460800 },
@@ -17,8 +17,8 @@ diff -uNr librs232-master/bindings/lua/luars232.c librs232-master_patched/bindin
  	{ "RS232_DATA_5", RS232_DATA_5 },
  	{ "RS232_DATA_6", RS232_DATA_6 },
 diff -uNr librs232-master/include/librs232/rs232.h librs232-master_patched/include/librs232/rs232.h
---- librs232-master/include/librs232/rs232.h	2019-11-20 12:18:47.000000000 +0100
-+++ librs232-master_patched/include/librs232/rs232.h	2020-12-08 21:52:57.573495570 +0100
+--- librs232-master/include/librs232/rs232.h	2023-10-12 11:17:54.000000000 +0200
++++ librs232-master_patched/include/librs232/rs232.h	2025-06-25 10:14:02.401631910 +0200
 @@ -101,6 +101,14 @@
  	RS232_BAUD_115200,
  	RS232_BAUD_460800,
@@ -35,8 +35,8 @@ diff -uNr librs232-master/include/librs232/rs232.h librs232-master_patched/inclu
  };
  
 diff -uNr librs232-master/include/librs232/rs232_windows.h librs232-master_patched/include/librs232/rs232_windows.h
---- librs232-master/include/librs232/rs232_windows.h	2019-11-20 12:18:47.000000000 +0100
-+++ librs232-master_patched/include/librs232/rs232_windows.h	2020-12-08 21:57:40.667952642 +0100
+--- librs232-master/include/librs232/rs232_windows.h	2023-10-12 11:17:54.000000000 +0200
++++ librs232-master_patched/include/librs232/rs232_windows.h	2025-06-25 10:14:02.401631910 +0200
 @@ -61,6 +61,38 @@
  #define CBR_921600 921600
  #endif
@@ -77,9 +77,9 @@ diff -uNr librs232-master/include/librs232/rs232_windows.h librs232-master_patch
  	HANDLE fd;
  	COMMTIMEOUTS old_tm;
 diff -uNr librs232-master/src/rs232_posix.c librs232-master_patched/src/rs232_posix.c
---- librs232-master/src/rs232_posix.c	2019-11-20 12:18:47.000000000 +0100
-+++ librs232-master_patched/src/rs232_posix.c	2020-12-08 21:45:43.872089426 +0100
-@@ -577,6 +577,38 @@
+--- librs232-master/src/rs232_posix.c	2023-10-12 11:17:54.000000000 +0200
++++ librs232-master_patched/src/rs232_posix.c	2025-06-25 10:14:02.402631900 +0200
+@@ -582,6 +582,38 @@
  		cfsetispeed(&term, B921600);
  		cfsetospeed(&term, B921600);
  		break;
@@ -119,8 +119,8 @@ diff -uNr librs232-master/src/rs232_posix.c librs232-master_patched/src/rs232_po
  		return RS232_ERR_UNKNOWN;
  	}
 diff -uNr librs232-master/src/rs232_windows.c librs232-master_patched/src/rs232_windows.c
---- librs232-master/src/rs232_windows.c	2019-11-20 12:18:47.000000000 +0100
-+++ librs232-master_patched/src/rs232_windows.c	2020-12-08 21:55:55.310752119 +0100
+--- librs232-master/src/rs232_windows.c	2023-10-12 11:17:54.000000000 +0200
++++ librs232-master_patched/src/rs232_windows.c	2025-06-25 10:14:02.402631900 +0200
 @@ -937,6 +937,30 @@
  	case RS232_BAUD_921600:
  		pdcb.BaudRate = CBR_921600;
