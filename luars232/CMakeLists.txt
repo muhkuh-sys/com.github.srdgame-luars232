@@ -42,8 +42,8 @@ IF((${BUILDCFG_ONLY_JONCHKI_CFG} STREQUAL "OFF"))
 
 	ExternalProject_Add(TARGET_luars232
 	                    PREFIX ${CMAKE_CURRENT_BINARY_DIR}/luars232
-	                    URL ${CMAKE_CURRENT_SOURCE_DIR}/librs232-gc106c94.zip
-	                    URL_HASH SHA1=1af2c7fa500231228144c9115426832380d771ea
+	                    URL ${CMAKE_CURRENT_SOURCE_DIR}/librs232-g7f358ef.zip
+	                    URL_HASH SHA1=2308601c26f2d769872f075a71cf2d6a5a343790
 	                    PATCH_COMMAND "${PYTHON_EXECUTABLE}" ${CMAKE_HOME_DIRECTORY}/cmake/tools/apply_patches.py --working-folder ${CMAKE_CURRENT_BINARY_DIR}/luars232/src/TARGET_luars232 --copy-folder ${CMAKE_CURRENT_SOURCE_DIR}/copy_over --patch-folder ${CMAKE_CURRENT_SOURCE_DIR}/patches --strip 1
 	                    CMAKE_ARGS ${SUB_CMAKE_ARGS}
 	                    TEST_BEFORE_INSTALL 1
