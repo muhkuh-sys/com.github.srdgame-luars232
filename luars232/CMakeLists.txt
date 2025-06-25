@@ -113,15 +113,4 @@ IF((${BUILDCFG_ONLY_JONCHKI_CFG} STREQUAL "OFF"))
 	                  COMMAND "${PYTHON_EXECUTABLE}" ${CMAKE_HOME_DIRECTORY}/cmake/tools/generate_hash.py ${CPACK_OUTPUT_FILE_PREFIX}/lua${BUILDCFG_LUA_VERSION}-luars232-${PROJECT_VERSION}-${JONCHKI_PLATFORM}.xml
 	                  COMMAND "${PYTHON_EXECUTABLE}" ${CMAKE_HOME_DIRECTORY}/cmake/tools/generate_hash.py ${CPACK_OUTPUT_FILE_PREFIX}/lua${BUILDCFG_LUA_VERSION}-luars232-${PROJECT_VERSION}-${JONCHKI_PLATFORM}.tar.xz
 	                  COMMENT "Pack the artifact and generate the hashes...")
-
-
-	#-----------------------------------------------------------------------------
-	#
-	# Filter the pom.xml file.
-	#
-	SET(POM_ARTIFACT_ID  "lua${BUILDCFG_LUA_VERSION}-luars232")
-	SET(POM_GROUP_ID     "com.github.srdgame")
-	SET(POM_VERSION      "${PROJECT_VERSION}")
-	SET(POM_PACKAGING    "tar.xz")
-	CONFIGURE_FILE(installer/lua${BUILDCFG_LUA_VERSION}/pom.xml ${CPACK_OUTPUT_FILE_PREFIX}/lua${BUILDCFG_LUA_VERSION}-luars232-${PROJECT_VERSION}.pom)
 ENDIF((${BUILDCFG_ONLY_JONCHKI_CFG} STREQUAL "OFF"))
